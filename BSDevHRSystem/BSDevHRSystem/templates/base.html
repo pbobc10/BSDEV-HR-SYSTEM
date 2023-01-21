@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    {% block metas %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock %}
+    <title>
+        {% block title %} {% endblock %}
+    </title>
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'node_modules\bootstrap\dist\css\bootstrap.min.css' %}">
+    {% endblock %}
+</head>
+<body>
+   {% block nav %} 
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+            <h1> Test </h1>
+        </nav>
+   {% endblock %}
+   <main>
+        <div class="jumbotron">
+            {% block page_content %}
+            {% endblock %}
+        </div>  
+   </main>
+   {% block js %}
+        <script src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'node_modules/popper.js/dist/popper.min.js' %}"></script>
+{% endblock %}
+
+</body>
+</html>
