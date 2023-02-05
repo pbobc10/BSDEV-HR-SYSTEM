@@ -1,0 +1,38 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="d-inline">Jobs</h5> 
+        <a href="{% url 'hrSystem:job-create' %}" type="button" class="btn btn-primary btn-sm float-end">
+            New Job
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Job Title</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{job.job_title}}</td>
+                    <td>{{job.salary}}</td>
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
+                        class="btn btn-warning btn-sm"
+                        href="{% url 'hrSystem:job-update' pk=job.pk %}">update</a> <a type="button"
+                        class="btn btn-danger btn-sm"
+                        href="{% url 'hrSystem:job-delete' pk=job.pk %}">delete</a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

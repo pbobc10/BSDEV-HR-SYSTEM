@@ -1,0 +1,43 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="d-inline">Assurances</h5>
+        <a href="{% url 'hrSystem:assurance-create' %}" type="button" class="btn btn-primary btn-sm float-end">
+            New Assurance
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Assurance Type</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+
+            </thead>
+            <tbody>
+                {% for assurance in assurances %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{assurance.assurance_type}}</td>
+                    <td>{{assurance.description}}</td>
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
+                            class="btn btn-warning btn-sm"
+                            href="{% url 'hrSystem:assurance-update' pk=assurance.pk %}">update</a> <a type="button"
+                            class="btn btn-danger btn-sm"
+                            href="{% url 'hrSystem:assurance-delete' pk=assurance.pk %}">delete</a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="d-inline">Statuss</h5> 
+        <a href="{% url 'hrSystem:status-create' %}" type="button" class="btn btn-primary btn-sm float-end">
+            New Status
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Status Type</th>
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for status in statuss %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{status.status_type}}</td>
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
+                        class="btn btn-warning btn-sm"
+                        href="{% url 'hrSystem:status-update' pk=status.pk %}">update</a> <a type="button"
+                        class="btn btn-danger btn-sm"
+                        href="{% url 'hrSystem:status-delete' pk=status.pk %}">delete</a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="d-inline">Locations</h5> 
+        <a href="{% url 'hrSystem:location-create' %}" type="button" class="btn btn-primary btn-sm float-end">
+            New Location
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Street Address</th>
+                <th scope="col">Postal Code</th>
+                <th scope="col">City</th>
+                <th scope="col">State Province</th>
+                <th scope="col">Country Id</th>
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for location in locations %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{location.street_address}}</td>
+                    <td>{{location.postal_code}}</td>
+                    <td>{{location.city}}</td>
+                    <td>{{location.state_province}}</td>
+                    <td>{{location.country_id}}</td>
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
+                        class="btn btn-warning btn-sm"
+                        href="{% url 'hrSystem:location-update' pk=location.pk %}">update</a> <a type="button"
+                        class="btn btn-danger btn-sm"
+                        href="{% url 'hrSystem:location-delete' pk=location.pk %}">delete</a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
