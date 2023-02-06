@@ -1,0 +1,40 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="d-inline">Departements</h5> 
+        <a href="{% url 'hrSystem:departement-create' %}" type="button" class="btn btn-primary btn-sm float-end">
+            New Departement
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">departement Name</th>
+                <th scope="col">Location Id</th>
+                <th scope="col">Manager Id</th>
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for departement in departements %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{departement.departement_name}}</td>
+                    <td>{{departement.location_id}}</td>
+                    <td>{{departement.manager_id}}</td>
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
+                        class="btn btn-warning btn-sm"
+                        href="{% url 'hrSystem:departement-update' pk=departement.pk %}">update</a> <a type="button"
+                        class="btn btn-danger btn-sm"
+                        href="{% url 'hrSystem:departement-delete' pk=departement.pk %}">delete</a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

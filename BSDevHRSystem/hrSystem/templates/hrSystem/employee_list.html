@@ -1,0 +1,68 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="d-inline">Employees</h5> 
+        <a href="{% url 'hrSystem:employee-create' %}" type="button" class="btn btn-primary btn-sm float-end">
+            New Employee
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Employee Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">CIN</th>
+                <th scope="col">NIF</th>
+                <!-- <th scope="col">Phone1</th>
+                <th scope="col">Phone2</th> -->
+                <!-- <th scope="col">Birth Date</th>
+                <th scope="col">Hire Date</th>
+                <th scope="col">Manager Id</th> -->
+                <!-- <th scope="col">Service Id</th> -->
+                <th scope="col">Status Id</th>
+                <!-- <th scope="col">Assurance Id</th> -->
+                <th scope="col">Job Id</th>
+                <!-- <th scope="col">Bank Id</th>
+                <th scope="col">Bank Account</th> -->
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{employee.employe_id}}</td>
+                    <td>{{employee.first_name}}</td>
+                    <td>{{employee.last_name}}</td>
+                    <td>{{employee.email}}</td>
+                    <td>{{employee.cin}}</td>
+                    <td>{{employee.nif}}</td>
+                    <!-- <td>{{employee.phone1}}</td>
+                    <td>{{employee.phone2}}</td> -->
+                    <!-- <td>{{employee.birth_date}}</td>
+                    <td>{{employee.hire_date}}</td>
+                    <td>{{employee.manager_id}}</td> -->
+                    <!-- <td>{{employee.service_id}}</td> -->
+                    <td>{{employee.status_id}}</td>
+                    <!-- <td>{{employee.assurance_id}}</td> -->
+                    <td>{{employee.job_id}}</td>
+                    <!-- <td>{{employee.bank_id}}</td>
+                    <td>{{employee.bank_account}}</td> -->
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
+                        class="btn btn-warning btn-sm"
+                        href="{% url 'hrSystem:employee-update' pk=employee.pk %}">update</a> <a type="button"
+                        class="btn btn-danger btn-sm"
+                        href="{% url 'hrSystem:employee-delete' pk=employee.pk %}">delete</a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

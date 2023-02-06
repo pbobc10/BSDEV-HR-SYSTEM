@@ -10,7 +10,7 @@ def index(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('registration:login'))
     # send users to dashboard page
-    return HttpResponse('<h1 style="width:160px;heigh:200px;">Bonjour</h1>')
+    return HttpResponseRedirect(reverse('hrSystem:dashboard'))
 
 def login_view(request):
     form = LoginForm()
@@ -25,7 +25,7 @@ def login_view(request):
         # if user object is returned, log in and route to dashboard page:
         if user:
             login(request,user)
-            return HttpResponseRedirect(reverse('registration:index'))
+            return HttpResponseRedirect(reverse('hrSystem:dashboard'))
         # otherwise, return login page again with new context
         else:
             return render(request,'registration/login.html',{
@@ -38,6 +38,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return render(request,'registration/login.html',{
-        'message':'Logged Out'
-        })
+    return HttpResponseRedirect(reverse('registration:login'))

@@ -1,0 +1,38 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="d-inline">Country</h5> 
+        <a href="{% url 'hrSystem:country-create' %}" type="button" class="btn btn-primary btn-sm float-end">
+            New country
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Country Name</th>
+                <th scope="col">Region</th>
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for country in countries %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{country.country_name}}</td>
+                    <td>{{country.region_id}}</td>
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
+                        class="btn btn-warning btn-sm"
+                        href="{% url 'hrSystem:country-update' pk=country.pk %}">update</a> <a type="button"
+                        class="btn btn-danger btn-sm"
+                        href="{% url 'hrSystem:country-delete' pk=country.pk %}">delete</a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

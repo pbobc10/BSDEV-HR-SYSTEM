@@ -1,0 +1,40 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="d-inline">Banks</h5> 
+        <a href="{% url 'hrSystem:bank-create' %}" type="button" class="btn btn-primary btn-sm float-end">
+            New bank
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Bank Code</th>
+                <th scope="col">Routing Number Bank</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for bank in banks %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{bank.bank_code}}</td>
+                    <td>{{bank.routing_number_bank}}</td>
+                    <td>{{bank.description}}</td>
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
+                        class="btn btn-warning btn-sm"
+                        href="{% url 'hrSystem:bank-update' pk=bank.pk %}">update</a> <a type="button"
+                        class="btn btn-danger btn-sm"
+                        href="{% url 'hrSystem:bank-delete' pk=bank.pk %}">delete</a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
