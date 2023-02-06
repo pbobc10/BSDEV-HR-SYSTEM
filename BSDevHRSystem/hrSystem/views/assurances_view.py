@@ -2,11 +2,12 @@ from django.urls import reverse_lazy
 from ..models.assurances_models import Assurance
 from ..forms.assurances_forms import AssuranceForm
 from django.views.generic import TemplateView,ListView,DetailView,UpdateView,DeleteView,CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class AssuranceView(TemplateView):
+class AssuranceView(LoginRequiredMixin,TemplateView):
     template_name = 'hrSystem/assurance.html'
 
-class AssuranceListView(ListView):
+class AssuranceListView(LoginRequiredMixin,ListView):
     model = Assurance
     context_object_name = 'assurances'
 

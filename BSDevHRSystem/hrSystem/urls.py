@@ -26,10 +26,14 @@ from .views.regions_view import RegionCreateView,RegionDeleteView,RegionDetailVi
 from .views.services_view import ServiceCreateView,ServiceDeleteView,ServiceDetailView,ServiceListView,ServiceUpdateView
 from .views.statuses_view import StatusCreateView,StatusDeleteView,StatusDetailView,StatusListView,StatusUpdateView
 from .views.withdrawals_view import WithdrawalCreateView,WithdrawalDeleteView,WithdrawalDetailView,WithdrawalListView,WithdrawalUpdateView
+from .views.dashboard_view import DashboardView
 
 app_name = 'hrSystem'
 
 urlpatterns=[
+    #Dashboard
+     re_path('^dashboard/$',DashboardView.as_view(),name='dashboard'),
+    #Assurance
     re_path('^assurance/$',AssuranceListView.as_view(),name='assurance-list'),
     re_path('^assurance/(?P<pk>\d+)/$',AssuranceDetailView.as_view(),name='assurance-detail'),
     re_path('^assurance/create/$',AssuranceCreateView.as_view(),name='assurance-create'),
