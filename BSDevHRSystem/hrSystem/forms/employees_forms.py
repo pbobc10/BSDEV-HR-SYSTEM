@@ -10,6 +10,7 @@ class EmployeeForm(ModelForm):
             'employe_id':TextInput(attrs={'class':'form-control'}),
             'last_name':TextInput(attrs={'class':'form-control'}),
             'first_name':TextInput(attrs={'class':'form-control'}),
+            'sex':Select(attrs={'class':'form-control'}),
             'email':EmailInput(attrs={'class':'form-control'}),
             'cin':NumberInput(attrs={'class':'form-control'}),
             'nif':TextInput(attrs={'class':'form-control'}),

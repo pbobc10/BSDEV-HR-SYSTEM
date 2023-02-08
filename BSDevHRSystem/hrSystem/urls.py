@@ -63,6 +63,7 @@ urlpatterns=[
     re_path('^employee/create/$',EmployeeCreateView.as_view(),name='employee-create'),
     re_path('^employee/update/(?P<pk>\d+)/$',EmployeeUpdateView.as_view(),name='employee-update'),
     re_path('^employee/delete/(?P<pk>\d+)/$',EmployeeDeleteView.as_view(),name='employee-delete'),
+    re_path('^employee/detail/(?P<pk>\d+)/$',EmployeeDetailView.as_view(),name='employee-detail'),
     #Job
     re_path('^job/$',JobListView.as_view(),name='job-list'),
     re_path('^job/(?P<pk>\d+)/$',JobDetailView.as_view(),name='job-detail'),

@@ -15,11 +15,23 @@ phone_validator= RegexValidator(regex='[234][0-9]{3}-[0-9]{4}',message="Enter a 
 cin_validator = RegexValidator(regex='[1-9][0-9]{9}',message='Enter a valid CIN number')
 nif_validator = RegexValidator(regex='[0]{2}[1-9]-[0-9]{3}-[0-9]{3}-[0-9]',message='Enter a valid NIF number')
 
+# choices
+TYPE_CHOICES_PAIEMENT=(
+        ('VIREMENT','VIREMENT'),
+        ('CHEQUE','CHEQUE')
+    )
+
+TYPE_CHOICES_SEX = (
+        ('MASCULINE','MASCULINE'),
+        ('FEMININE','FEMININE')
+    )
+
 # Create your models here.
 class Employee(models.Model):
     employe_id = models.IntegerField(unique=True,null=False,validators=[MinValueValidator(100000000)],default=from_100000000)
     last_name = models.CharField(max_length=128,null=False,blank=False)
     first_name = models.CharField(max_length=128,null=False,blank=False)
+    sex = models.CharField(max_length=15,null=False,blank=False,choices=TYPE_CHOICES_SEX)
     email = models.EmailField(max_length=128)
     cin = models.IntegerField(null=False,blank=False,validators=[cin_validator])
     nif = models.CharField(max_length=13,null=False,blank=False,validators=[nif_validator])
@@ -35,13 +47,7 @@ class Employee(models.Model):
     job_id = models.ForeignKey('Job',on_delete=models.CASCADE,related_name='employees')
     bank_id = models.ForeignKey('Bank',on_delete=models.CASCADE,related_name='employees',null=True,blank=True)
     bank_account = models.IntegerField(null=True,blank=True)
-
-    TYPE_CHOICES=(
-        ('VIREMENT','VIREMENT'),
-        ('CHEQUE','CHEQUE')
-    )
-
-    mode_paiement = models.CharField(max_length=11,choices=TYPE_CHOICES)
+    mode_paiement = models.CharField(max_length=11,choices=TYPE_CHOICES_PAIEMENT)
 
     def __str__(self) -> str:
         return self.last_name
