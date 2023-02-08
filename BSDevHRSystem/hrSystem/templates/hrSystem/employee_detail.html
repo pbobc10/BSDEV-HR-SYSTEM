@@ -1,0 +1,115 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<div class="jumbotron">
+    <h1 class="display-3">Details</h1>
+    <p class="lead">Employee personal information page.</p>
+    <hr class="my-2">
+    <!-- <p>Use utility classes for typography and spacing</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#!" role="button">Ready for action</a>
+    </p> -->
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-8">
+        <table class="table table-striped">
+
+            <tr>
+                <td>Employee Id</td>
+                <td>{{employee.employe_id}}</td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td> {{employee.first_name}}</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>{{employee.last_name}}</td>
+            </tr>
+            <tr>
+                <td>Birth Date</td>
+                <td>{{employee.birth_date}}</td>
+            </tr>
+            <tr>
+                <td>Sex</td>
+                <td>{{employee.sex}}</td>
+            </tr>
+
+
+
+            <tr>
+                <td>Email</td>
+                <td> {{employee.email}}</td>
+            </tr>
+            <tr>
+                <td>CIN</td>
+                <td>{{employee.cin}}</td>
+            </tr>
+            <tr>
+                <td>NIF</td>
+                <td>{{employee.nif}}</td>
+            </tr>
+            <tr>
+                <td>Phone 1</td>
+                <td>{{employee.phone1}}</td>
+            </tr>
+            <tr>
+                <td>Phone 2</td>
+                <td>{{employee.phone2}}</td>
+            </tr>
+
+
+
+            <tr>
+                <td>Hire Date</td>
+                <td>{{employee.hire_date}}</td>
+            </tr>
+            <tr>
+                <td>Position</td>
+                <td>{{employee.job_id}}</td>
+            </tr>
+            <tr>
+                <td>Service</td>
+                <td> {{employee.service_id}}</td>
+            </tr>
+            <tr>
+                <td>Manager</td>
+                <td> {{employee.manager_id}}</td>
+            </tr>
+
+
+
+            <tr>
+                <td>Status</td>
+                <td>{{employee.status_id}}</td>
+            </tr>
+            <tr>
+                <td>Assurance</td>
+                <td>{{employee.assurance_id}}</td>
+            </tr>
+            <tr>
+                <td>Bank</td>
+                <td>{{employee.bank_id}}</td>
+            </tr>
+            <tr>
+                <td>Bank Account</td>
+                <td>{{employee.bank_account}}</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card">
+            <img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+            <div class="card-body"> What an epic image!</div>
+        </div>
+        <br>
+        <p class="lead">
+            <a class="btn btn-primary btn-sm" href="{% url 'hrSystem:employee-list' %}" role="button">Back To Employee List</a>
+        </p>
+    </div>
+</div>
+</div>
+{% endblock %}

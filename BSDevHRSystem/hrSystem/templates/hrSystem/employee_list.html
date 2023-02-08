@@ -13,9 +13,9 @@
         <table class="table">
             <thead>
                 <th scope="col">#</th>
-                <th scope="col">Employee Id</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
+                <!-- <th scope="col">Employee Id</th> -->
+                <th scope="col">Full Name</th>
+                <!-- <th scope="col">Last Name</th> -->
                 <th scope="col">Email</th>
                 <th scope="col">CIN</th>
                 <th scope="col">NIF</th>
@@ -25,9 +25,10 @@
                 <th scope="col">Hire Date</th>
                 <th scope="col">Manager Id</th> -->
                 <!-- <th scope="col">Service Id</th> -->
-                <th scope="col">Status Id</th>
+                <th scope="col">Status</th>
                 <!-- <th scope="col">Assurance Id</th> -->
-                <th scope="col">Job Id</th>
+                <th scope="col">Service</th>
+                <th scope="col">Position</th>
                 <!-- <th scope="col">Bank Id</th>
                 <th scope="col">Bank Account</th> -->
                 <th scope="col">Action</th>
@@ -36,9 +37,8 @@
                 {% for employee in employees %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{employee.employe_id}}</td>
-                    <td>{{employee.first_name}}</td>
-                    <td>{{employee.last_name}}</td>
+                    <!-- <td>{{employee.employe_id}}</td> -->
+                    <td><a href="{% url 'hrSystem:employee-detail' pk=employee.pk %}">{{employee.first_name}} {{employee.last_name}}</a></td>
                     <td>{{employee.email}}</td>
                     <td>{{employee.cin}}</td>
                     <td>{{employee.nif}}</td>
@@ -47,9 +47,9 @@
                     <!-- <td>{{employee.birth_date}}</td>
                     <td>{{employee.hire_date}}</td>
                     <td>{{employee.manager_id}}</td> -->
-                    <!-- <td>{{employee.service_id}}</td> -->
                     <td>{{employee.status_id}}</td>
                     <!-- <td>{{employee.assurance_id}}</td> -->
+                    <td>{{employee.service_id}}</td>
                     <td>{{employee.job_id}}</td>
                     <!-- <td>{{employee.bank_id}}</td>
                     <td>{{employee.bank_account}}</td> -->

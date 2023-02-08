@@ -13,8 +13,8 @@ class EmployeeListView(LoginRequiredMixin,ListView):
 
 class EmployeeDetailView(LoginRequiredMixin,DetailView):
     model = Employee
-    context_object_name = 'employee_detail'
-    template_name = ''
+    context_object_name = 'employee'
+    template_name = 'hrSystem/employee_detail.html'
 
 class EmployeeCreateView(LoginRequiredMixin,CreateView):
     model = Employee
