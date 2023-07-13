@@ -6,7 +6,7 @@ class DepartementForm(ModelForm):
         model = Departement
         fields = '__all__'
         widgets = {
-            'departement_name':TextInput(attrs={'class':'form-control'}),
+            'departement_name':TextInput(attrs={'class':'form-control text-capitalize','type':'text'}),
             'location_id':Select(attrs={'class':'form-control'}),
             'manager_id' :Select(attrs={'class':'form-control'}),
         }

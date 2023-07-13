@@ -6,7 +6,7 @@ class WithdrawalForm(ModelForm):
         model = Withdrawal
         fields = '__all__'
         widgets = {
-            'withdrawal_name':TextInput(attrs={'class':'form-control'}),
-            'withdrawal_amount':TextInput(attrs={'class':'form-control'}),
+            'withdrawal_name':TextInput(attrs={'class':'form-control text-capitalize','type':'text'}),
+            'withdrawal_amount':TextInput(attrs={'class':'form-control text-capitalize','type':'number'}),
             'description':Textarea(attrs={'class':'form-control'}),
         }

@@ -1,0 +1,11 @@
+Group Admin --->  all permissions
+
+
+Group Manager ---- :
+
+
+Group Hr ------- :
+
+
+Group Employee ------ :
+    

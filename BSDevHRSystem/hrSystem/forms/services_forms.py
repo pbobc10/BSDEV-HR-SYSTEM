@@ -6,6 +6,6 @@ class ServiceForm(ModelForm):
         model = Service
         fields = '__all__'
         widgets = {
-            'service_name':TextInput(attrs={'class':'form-control'}),
+            'service_name':TextInput(attrs={'class':'form-control text-capitalize','type':'text'}),
             'departement_id':Select(attrs={'class':'form-control'}),
         }

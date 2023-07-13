@@ -6,6 +6,6 @@ class MouvementForm(ModelForm):
         model = Mouvement
         fields = '__all__'
         widgets = {
-            'mouvement_type':TextInput(attrs={'class':'form-control'}),
-            'description':Textarea(attrs={'class':'form-control','cols':60,'row':3}),
+            'mouvement_type':TextInput(attrs={'class':'form-control text-uppercase','type':'text'}),
+            'description':Textarea(attrs={'class':'form-control text-capitalize','cols':60,'row':3}),
         }

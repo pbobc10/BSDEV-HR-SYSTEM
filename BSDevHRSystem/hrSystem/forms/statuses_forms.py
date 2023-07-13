@@ -6,5 +6,5 @@ class StatusForm(ModelForm):
         model = Status
         fields = '__all__'
         widgets = {
-            'status_type':TextInput(attrs={'class':'form-control'}),
+            'status_type':TextInput(attrs={'class':'form-control text-uppercase','type':'text'}),
         }

@@ -6,6 +6,6 @@ class CountryForm(ModelForm):
         model = Country
         fields = '__all__'
         widgets = {
-            'country_name':TextInput(attrs={'class':'form-control'}),
+            'country_name':TextInput(attrs={'class':'form-control text-capitalize','type':'text'}),
             'region_id':Select(attrs={'class':'form-control'}),
         }

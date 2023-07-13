@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.urls import path,re_path
 from .views.assurances_view import AssuranceListView, AssuranceCreateView,AssuranceDetailView,AssuranceUpdateView,AssuranceDeleteView
-from .views.banks_view import BankCreateView,BankDeleteView,BankDetailView,BankListView,BankUpdateView
+from .views.banks_view import BankCreateView,BankDeleteView,BankDetailView,BankListView,BankUpdateView,csv
+from .views.leaves_view import LeaveCreateView,LeaveDeleteView,LeaveDetailView,LeaveListView,LeaveUpdateView
 from .views.country_view import CountryCreateView,CountryDeleteView,CountryDetailView,CountryListView,CountryUpdateView
 from .views.departement_view import DepartementCreateView,DepartementDeleteView,DepartementDetailView,DepartementListView,DepartementUpdateView
 from .views.employees_view import EmployeeCreateView,EmployeeDeleteView,EmployeeDetailView,EmployeeListView,EmployeeUpdateView
@@ -45,6 +46,13 @@ urlpatterns=[
     re_path('^bank/create/$',BankCreateView.as_view(),name='bank-create'),
     re_path('^bank/update/(?P<pk>\d+)/$',BankUpdateView.as_view(),name='bank-update'),
     re_path('^bank/delete/(?P<pk>\d+)/$',BankDeleteView.as_view(),name='bank-delete'),
+    re_path('^bank/csv/$',csv,name='bank-csv'),
+    # Leaves
+    re_path('^leave/$',LeaveListView.as_view(),name='leave-list'),
+    re_path('^leave/(?P<pk>\d+)/$',LeaveDetailView.as_view(),name='leave-detail'),
+    re_path('^leave/create/$',LeaveCreateView.as_view(),name='leave-create'),
+    re_path('^leave/update/(?P<pk>\d+)/$',LeaveUpdateView.as_view(),name='leave-update'),
+    re_path('^leave/delete/(?P<pk>\d+)/$',LeaveDeleteView.as_view(),name='leave-delete'),
     #Country
     re_path('^country/$',CountryListView.as_view(),name='country-list'),
     re_path('^country/(?P<pk>\d+)/$',CountryDetailView.as_view(),name='country-detail'),

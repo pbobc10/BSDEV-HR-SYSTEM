@@ -2,13 +2,13 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse
-from .user_form import LoginForm
+from ..forms.user_form import LoginForm
 
 # Create your views here.
 # if no user is signed in, return to login page:
 def index(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('registration:login'))
+        return HttpResponseRedirect(reverse('accounts:login'))
     # send users to dashboard page
     return HttpResponseRedirect(reverse('hrSystem:dashboard'))
 
@@ -25,7 +25,12 @@ def login_view(request):
         # if user object is returned, log in and route to dashboard page:
         if user:
             login(request,user)
-            return HttpResponseRedirect(reverse('hrSystem:dashboard'))
+            if user.last_login:
+                return HttpResponseRedirect(reverse('hrSystem:dashboard'))
+            else:
+                # Redirect to change password page for first time login
+                return HttpResponseRedirect(reverse('accounts:change_password'))
+                
         # otherwise, return login page again with new context
         else:
             return render(request,'registration/login.html',{
@@ -36,6 +41,8 @@ def login_view(request):
     context = {'form':form}
     return render(request,'registration/login.html',context)
 
+
+
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('registration:login'))
+    return HttpResponseRedirect(reverse('accounts:login'))

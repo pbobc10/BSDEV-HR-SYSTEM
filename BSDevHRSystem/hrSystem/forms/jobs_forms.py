@@ -6,6 +6,6 @@ class JobForm(ModelForm):
         model = Job
         fields = '__all__'
         widgets = {
-            'job_title':TextInput(attrs={'class':'form-control'}),
-            'salary':TextInput(attrs={'class':'form-control'}),
+            'job_title':TextInput(attrs={'class':'form-control text-capitalize','type':'text'}),
+            'salary':TextInput(attrs={'class':'form-control','type':'number'}),
         }

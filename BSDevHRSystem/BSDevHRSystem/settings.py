@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'registration.middlewares.first_login_middleware.FirstLoginMiddleWare',
 ]
 
 ROOT_URLCONF = 'BSDevHRSystem.urls'

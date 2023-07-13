@@ -1,14 +1,167 @@
 {% extends 'base_app.html' %}
 
+{% block style %}
+<style>
+    .gradient-purple {
+        background-image: linear-gradient(to right, #9D38BD, #6A5ACD);
+    }
+
+    .gradient-peach {
+        background-image: linear-gradient(to right, #fa750e, #FFE4B5);
+    }
+
+    .gradient-blue {
+        background-image: linear-gradient(to right, #0074D9, #00BFFF);
+    }
+
+    .gradient-red {
+        background-image: linear-gradient(to right, #AA0000, #FF0000);
+    }
+</style>
+{% endblock style %}
+
 {% block page_content %}
+
 <div class="jumbotron">
-    <h1 class="display-3">Hey, awesome you!</h1>
-    <p class="lead">This is a simple hero unit, showing that anyone can be a real
-        hero!.</p>
-    <hr class="my-2">
-    <p>Use utility classes for typography and spacing</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#!" role="button">Ready for action</a>
-    </p>
-</div>
-{% endblock page_content %}
+    <div class="row">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card gradient-purple">
+                <div class="card-header">
+                    <h3 class="card-title text-white">Departement</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-white">{{number_of_departements}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card gradient-peach">
+                <div class="card-header">
+                    <h3 class="card-title text-white">Service</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-white">{{number_of_services}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card gradient-blue">
+                <div class="card-header">
+                    <h3 class="card-title text-white">Poste</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-white">{{number_of_jobs}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card gradient-red">
+                <div class="card-header">
+                    <h3 class="card-title text-white">Employee</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-white">{{number_of_employees}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="card">
+            <div class="card-header" style=" background-color: #6f42c1">
+                <h6 class="card-title text-white ">Upcoming Birthday</h6>
+            </div>
+            <div class="card-body">
+                <!--  birthday table with header that takes employee's first_name , last_name,sex,birtth_date,job,service(departement)  -->
+                <table id="example" class="table table-striped">
+                    <thead>
+                        <th scope="col">#</th>
+                        <th>first_name</th>
+                        <th>last_name</th>
+                        <th>sex</th>
+                        <th>birth_date</th>
+                        <th>job</th>
+                        <th>departement</th>
+                    </thead>
+                    <tbody>
+                        {% for employee_birth in employees_birth %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{employee_birth.first_name}}</td>
+                            <td>{{employee_birth.last_name}}</td>
+                            <td>{{employee_birth.sex}}</td>
+                            <td>{{employee_birth.birth_date}}</td>
+                            <td>{{employee_birth.job_id}}</td>
+                            {% if employee_birth.service_id is not None %}
+                            <td>{{employee_birth.service_id.departement_id}}</td>   
+                            {% else %}    
+                            <td>{{ employee_birth.departement_id }}</td>  
+                            {% endif %}               
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div>
+            <!-- <canvas id="myChart" style="margin: 0;padding:0;"></canvas> -->
+        </div>
+        <div class="col-sm-6 col-lg-4">
+            <div class="card">
+                <div>
+                    <canvas id="myChart" width="50px" height="50px"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title text-black">Test</h6>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart" width="50" height="20"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title text-black">Test</h6>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart" width="50" height="20"></canvas>
+                </div>
+            </div>
+        </div>
+        <!--Safely outputs a Python object as JSON, wrapped in a <script> tag, ready for use with JavaScript.-->
+        {{pie_chart|json_script:'pie_data'}}
+
+    </div>
+
+    <script>
+        const pie_data_from_json = JSON.parse(document.getElementById('pie_data').textContent);
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: pie_data_from_json[0],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data:pie_data_from_json[1],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+
+        });
+    </script>
+
+    {% endblock page_content %}

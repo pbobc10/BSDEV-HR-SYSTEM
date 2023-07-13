@@ -52,11 +52,11 @@ class DepartementAdmin(admin.ModelAdmin):
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    fields = ('employe_id','last_name','first_name','sex','email','cin','nif','phone1','phone2','birth_date','hire_date','manager_id','service_id','status_id','assurance_id','job_id','bank_id','bank_account','mode_paiement',)
-    list_display =   ('employe_id','last_name','first_name','sex','email','cin','nif','phone1','phone2','birth_date','hire_date','manager_id','service_id','status_id','assurance_id','job_id','bank_id','bank_account','mode_paiement',)
-    list_display_links = ('employe_id','cin','nif')
-    ordering = ('employe_id',)
-    search_fields = ('employe_id','last_name','first_name','nif','cin')
+    fields = ('employee_id','last_name','first_name','sex','email','cin','nif','phone1','phone2','birth_date','hire_date','manager_id','service_id','status_id','assurance_id','job_id','bank_id','bank_account','mode_paiement',)
+    list_display =   ('employee_id','last_name','first_name','sex','email','cin','nif','phone1','phone2','birth_date','hire_date','manager_id','service_id','status_id','assurance_id','job_id','bank_id','bank_account','mode_paiement',)
+    list_display_links = ('employee_id','cin','nif')
+    ordering = ('employee_id',)
+    search_fields = ('employee_id','last_name','first_name','nif','cin')
 
 @admin.register(Job)
 class JobAdmin(admin.ModelAdmin):

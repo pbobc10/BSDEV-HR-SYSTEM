@@ -1,0 +1,44 @@
+{% extends 'base_app.html' %}
+
+
+{% block page_content %}
+<br>
+<div class="card">
+    <h5 class="card-header">
+        {% if not form.instance.pk %}
+        Create Leave
+        {% else %}
+        Update Leave
+        {% endif %}
+    </h5>
+    <form class="form-control" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.media }}
+        <input type="submit" class="btn btn-danger btn-sm" value="Yes, I'm sure">
+        <a class="btn btn-secondary btn-sm" href="{% url 'hrSystem:leave-list' %}"> No, take me back </a>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Hide the comment field initially
+        $('#id_comment').hide();
+
+        // Show the comment field when "Other" is selected
+        $('#id_reason').change(function () {
+            if ($(this).val() == 'OTHER') {
+                $('#id_comment').show();
+            } else {
+                $('#id_comment').hide();
+            }
+        });
+    });
+</script>
+
+{% endblock %}
+
+
+
+

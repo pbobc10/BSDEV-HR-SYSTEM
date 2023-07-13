@@ -7,6 +7,6 @@ class AssuranceForm(ModelForm):
         model = Assurance
         fields = '__all__'
         widgets = {
-            'assurance_type':TextInput(attrs={'class':'form-control'}),
+            'assurance_type':TextInput(attrs={'class':'form-control text-uppercase','type':'text'}),
             'description':Textarea(attrs={'class':'form-control','cols':60,'rows':3}),
         }

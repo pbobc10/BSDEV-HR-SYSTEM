@@ -6,5 +6,5 @@ class RegionForm(ModelForm):
         model = Region
         fields = '__all__'
         widgets = {
-            'region_name':TextInput(attrs={'class':'form-control'}),
+            'region_name':TextInput(attrs={'class':'form-control text-capitalize','type':'text'}),
         } 

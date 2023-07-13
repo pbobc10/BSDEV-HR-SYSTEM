@@ -1,0 +1,42 @@
+{% extends 'base_app.html' %}
+
+{% block page_content %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="d-inline">Leave Management</h5> 
+        <a href="{% url 'hrSystem:leave-create' %}" type="button" class="btn btn-primary btn-sm float-end">
+            New Leave
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Reason</th>
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for leave in leaves %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{leave.employee}}</td>
+                    <td>{{leave.start_date}}</td>
+                    <td>{{leave.end_date}}</td>
+                    <td>{{leave.reason}}</td>
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
+                        class="btn btn-warning btn-sm"
+                        href="{% url 'hrSystem:leave-update' pk=leave.pk %}">update</a> <a type="button"
+                        class="btn btn-danger btn-sm"
+                        href="{% url 'hrSystem:leave-delete' pk=leave.pk %}">delete</a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
