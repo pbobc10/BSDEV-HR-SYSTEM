@@ -15,13 +15,13 @@ class LeaveForm(ModelForm):
 
     class Meta:
         model = Leave
-        # exclude = ('employee_id',)
+        exclude = ('employee',)
         fields = '__all__'
         labels = {
             'comment': '',
         }
         widgets = {
-            'employee_id':Select(attrs={'class':'form-control'}),
+            'employee':Select(attrs={'class':'form-control'}),
             'start_date':DateInput(attrs={'class':'form-control','type': 'date'}),
             'end_date':DateInput(attrs={'class':'form-control','type': 'date'}),
             'reason':Select(attrs={'class':'form-control'}),

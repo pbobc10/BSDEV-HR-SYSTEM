@@ -58,4 +58,7 @@ def force_password_change(user_id):
 
 def logout_view(request):
     logout(request)
+    # Delete all of the user's sessions
+    for sessionKey in request.session.keys():
+        del request.session[sessionKey]
     return HttpResponseRedirect(reverse('accounts:login'))

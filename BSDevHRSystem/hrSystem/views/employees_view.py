@@ -92,13 +92,12 @@ class EmployeeCreateView(LoginRequiredMixin,UserPassesTestMixin,GroupRequiredMix
            is_staff=False,
            is_superuser=False
         )
-
+        form.instance.user = user
         # add the user to the employee's group
         group = Group.objects.get(name='Employee')
         user.groups.add(group)
 
-        # force the user to change their password at first login
-        #user.set_unusable_password()
+        # save the user instance
         user.save()
         messages.success(self.request, 'Employee successfully created')
         return super().form_valid(form)

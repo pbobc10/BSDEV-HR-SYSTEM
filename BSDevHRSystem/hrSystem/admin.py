@@ -11,6 +11,7 @@ from .models.regions_models import Region
 from .models.services_models import Service
 from .models.statuses_models import Status
 from .models.withdrawals_models import Withdrawal
+from .models.leaves_models import Leave
 
 # Register your models here.
 @admin.register(Assurance)
@@ -53,7 +54,7 @@ class DepartementAdmin(admin.ModelAdmin):
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
     fields = ('employee_id','last_name','first_name','sex','email','cin','nif','phone1','phone2','birth_date','hire_date','manager_id','service_id','status_id','assurance_id','job_id','bank_id','bank_account','mode_paiement',)
-    list_display =   ('employee_id','last_name','first_name','sex','email','cin','nif','phone1','phone2','birth_date','hire_date','manager_id','service_id','status_id','assurance_id','job_id','bank_id','bank_account','mode_paiement',)
+    list_display =   ('employee_id','user','last_name','first_name','sex','email','cin','nif','phone1','phone2','birth_date','hire_date','manager_id','service_id','status_id','assurance_id','job_id','bank_id','bank_account','mode_paiement',)
     list_display_links = ('employee_id','cin','nif')
     ordering = ('employee_id',)
     search_fields = ('employee_id','last_name','first_name','nif','cin')
@@ -105,6 +106,14 @@ class StatusAdmin(admin.ModelAdmin):
     list_display_links = ('status_type',)
     ordering = ('status_type',)
     search_fields = ('status_type',)
+
+@admin.register(Leave)
+class WithdrawalAdmin(admin.ModelAdmin):
+    fields = ('start_date','end_date','reason','comment','status','can_edit')
+    list_display = ('employee','start_date','end_date','reason','comment','status','can_edit','created_at','updated_at')
+    list_display_links = ('employee',)
+    ordering = ('created_at',)
+    search_fields = ('employee',)
 
 @admin.register(Withdrawal)
 class WithdrawalAdmin(admin.ModelAdmin):

@@ -16,12 +16,12 @@ class Leave(models.Model):
     )
 
     TYPE_CHOICES_LEAVE_STATUS = (
-        ('PENDING','PENDING'),
+       # ('PENDING','PENDING'),
         ('APPROVED','APPROVED'),
         ('REJECTED','REJECTED'),
     )
 
-    employee_id = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name='leaves')
+    employee = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name='leaves',null=True,blank=True)
     start_date = models.DateField(validators=[MinValueValidator(date.today())])
     end_date = models.DateField()
     reason = models.CharField(max_length=40,null=False,blank=False,choices=TYPE_CHOICES_LEAVE)
