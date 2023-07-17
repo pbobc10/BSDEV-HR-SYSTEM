@@ -29,12 +29,16 @@
                     <td>{{leave.end_date}}</td>
                     <td>{{leave.reason}}</td>
                     <td>{{leave.status}}</td>
-                    <td class="btn-group" role="group" aria-label="Basic mixed styles example"><a type="button"
-                        class="btn btn-warning btn-sm"
-                        href="{% url 'hrSystem:leave-update' pk=leave.pk %}">update</a> <a type="button"
-                        class="btn btn-danger btn-sm"
-                        href="{% url 'hrSystem:leave-delete' pk=leave.pk %}">delete</a>
-                </td>
+                    <td class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        {% if leave.status != 'PENDING'  %}
+                            NO ACTION
+                        {% elif leave.status == 'PENDING' and leave.employee.user == request.user %}
+                            <a type="button"class="btn btn-warning btn-sm"href="{% url 'hrSystem:leave-update' pk=leave.pk %}">update</a> 
+                            <a type="button"class="btn btn-danger btn-sm"href="{% url 'hrSystem:leave-delete' pk=leave.pk %}">delete</a>
+                        {% elif leave.status == 'PENDING' and can_update %}
+                            <a type="button"class="btn btn-warning btn-sm"href="{% url 'hrSystem:leave-update' pk=leave.pk %}">update</a> 
+                        {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
