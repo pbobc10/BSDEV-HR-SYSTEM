@@ -12,6 +12,7 @@ from .models.services_models import Service
 from .models.statuses_models import Status
 from .models.withdrawals_models import Withdrawal
 from .models.leaves_models import Leave
+from .models.days_off_models import DaysOff
 
 # Register your models here.
 @admin.register(Assurance)
@@ -122,3 +123,11 @@ class WithdrawalAdmin(admin.ModelAdmin):
     list_display_links = ('withdrawal_name',)
     ordering = ('withdrawal_name',)
     search_fields = ('withdrawal_name',)
+
+@admin.register(DaysOff)
+class WithdrawalAdmin(admin.ModelAdmin):
+    fields = ('day','description',)
+    list_display = ('day','description',)
+    list_display_links =  ('day',)
+    ordering =  ('day',)
+    search_fields =  ('day',)

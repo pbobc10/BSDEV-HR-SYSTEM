@@ -11,7 +11,7 @@ from django.http.response import HttpResponseRedirect
 from django.contrib import messages
 from  csv import writer
 from django.http import JsonResponse,HttpResponse
-from datetime import datetime,date
+from datetime import datetime,date,timedelta
 
 class LeaveView(LoginRequiredMixin,UserPassesTestMixin,GroupRequiredMixin,TemplateView):
     template_name = 'hrSystem/leave.html'
@@ -95,20 +95,27 @@ class LeaveCreateView(LoginRequiredMixin,UserPassesTestMixin,GroupRequiredMixin,
         return HttpResponseRedirect(reverse_lazy('hrSystem:leave-list'))
     
     def form_valid(self,form):
-        # prevent a user from registering a new leave if the period of an approved leave has not yet passed
-        last_approved_leave = Leave.objects.filter(employee = Employee.objects.get(user=self.request.user),status = 'APPROVED').order_by('-end_date').first()
-        if last_approved_leave and last_approved_leave.end_date >= date.today():
-            messages.warning(self.request, 'You cannot submit a new leave if the period of an approved one has not yet passed')
+        # employee cannot submit a leave if he hasn't had at least one year of work
+        employee = Employee.objects.get(user=self.request.user)
+        # check if employee has at least one year of work
+        if date.today() - employee.hire_date < timedelta(days=365):
+            messages.warning(self.request, 'You cannot submit a new leave if you haven\'t had at least one year of work')
             return HttpResponseRedirect(reverse_lazy('hrSystem:leave-list'))
-        else :
-        # Prevent employee to submit a new leave if he got a pending one
-            if Leave.objects.filter(employee=Employee.objects.get(user=self.request.user),status='PENDING').exists():
-                messages.warning(self.request, 'You cannot submit a new leave if you had one pendind')
+        else:
+        # prevent a user from registering a new leave if the period of an approved one has not yet passed
+            last_approved_leave = Leave.objects.filter(employee = Employee.objects.get(user=self.request.user),status = 'APPROVED').order_by('-end_date').first()
+            if last_approved_leave and last_approved_leave.end_date >= date.today():
+                messages.warning(self.request, 'You cannot submit a new leave if the period of an approved one has not yet passed')
                 return HttpResponseRedirect(reverse_lazy('hrSystem:leave-list'))
-            
-            else: # submit the leave
-                form.instance.employee =Employee.objects.get(user=self.request.user) 
-                messages.success(self.request, 'Leave successfully created')
+            else :
+            # Prevent employee to submit a new leave if he got a pending one
+                if Leave.objects.filter(employee=Employee.objects.get(user=self.request.user),status='PENDING').exists():
+                    messages.warning(self.request, 'You cannot submit a new leave if you had one pendind')
+                    return HttpResponseRedirect(reverse_lazy('hrSystem:leave-list'))
+                
+                else: # submit the leave
+                    form.instance.employee =Employee.objects.get(user=self.request.user) 
+                    messages.success(self.request, 'Leave successfully created')
         return super().form_valid(form)
     
     def form_invalid(self,form):
@@ -124,6 +131,14 @@ class LeaveCreateView(LoginRequiredMixin,UserPassesTestMixin,GroupRequiredMixin,
         form.fields.pop('status')
         form.fields.pop('can_edit')
         form.instance.status = 'PENDING'
+
+        # customize the leave choices based on the gender of the employee
+        employee = Employee.objects.get(user=self.request.user)
+        if employee.sex == 'M':
+            # reassign values to the reason field based on the gender
+            form.fields['reason'].choices = [(key,value) for key,value in form.fields['reason'].choices if key != 'MATERNITY' ]
+        else:
+            form.fields['reason'].choices = [(key,value) for key,value in form.fields['reason'].choices if key != 'PATERNITY' ]
         return form
     
 class LeaveUpdateView(LoginRequiredMixin,UserPassesTestMixin,GroupRequiredMixin,UpdateView):
@@ -157,8 +172,17 @@ class LeaveUpdateView(LoginRequiredMixin,UserPassesTestMixin,GroupRequiredMixin,
             form.fields.pop('status')
             form.fields.pop('can_edit')
             form.instance.status = 'PENDING'
-        return form
 
+        # customize the leave choices based on the gender of the employee
+        employee = Employee.objects.get(user=self.request.user)
+        if employee.sex == 'M':
+            # reassign values to the reason field based on the gender
+            form.fields['reason'].choices = [(key,value) for key,value in form.fields['reason'].choices if key != 'MATERNITY' ]
+        else:
+            form.fields['reason'].choices = [(key,value) for key,value in form.fields['reason'].choices if key != 'PATERNITY' ]
+
+        return form
+    
 class LeaveDeleteView(LoginRequiredMixin,UserPassesTestMixin,GroupRequiredMixin,DeleteView):
     model = Leave
     success_url = reverse_lazy('hrSystem:leave-list')
